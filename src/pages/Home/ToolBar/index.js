@@ -4,6 +4,9 @@
 
 import React, { PureComponent } from "react";
 import { Icon, Tooltip, Button, Select } from "antd";
+import dagre from "dagre";
+import graphlib from "graphlib";
+
 const { Option } = Select;
 
 export default class index extends PureComponent {
@@ -22,7 +25,8 @@ export default class index extends PureComponent {
 			// { name: "导出svg", icon: "" },
 			// { name: "导出png", icon: "" }
 		],
-		routers: ["normal", "manhattan", "metro", "orthogonal", "oneSide"]
+		routers: ["normal", "manhattan", "metro", "orthogonal", "oneSide"],
+		rankdir: ["TB", "BT", "LR", "RL"]
 	}
 
 	clickItem(type) {
@@ -69,8 +73,24 @@ export default class index extends PureComponent {
 		window.lbPaper.options.defaultRouter.name = name;
 	}
 
+	beautify(item) {
+		window.lbPaper.freeze();
+		const cells = window.lbGraph.getCells();
+		joint.layout.DirectedGraph.layout(cells, {
+			dagre: dagre,
+			graphlib: graphlib,
+			rankDir: item,
+			rankSep: 130,
+			marginX: 50,
+			marginY: 50,
+			nodeSep: 80,
+			edgeSep: 50
+		});
+		window.lbPaper.unfreeze();
+	}
+
 	render() {
-		const { list, routers } = this.state;
+		const { list, routers, rankdir } = this.state;
 
 		return (
 			<div className="toolbar">
@@ -97,11 +117,23 @@ export default class index extends PureComponent {
 					})
 				}
 				路由模式：
-				<Select defaultValue="normal" style={{ width: 120 }}>
+				<Select defaultValue="normal" style={{ width: 120, marginRight: "10px" }}>
 					{
 						routers.map((item, index) => {
 							return (
 								<Option value={item} key={index} onClick={() => this.changeRouter(item)}>
+									{item}
+								</Option>
+							);
+						})
+					}
+				</Select>
+				美化布局：
+				<Select style={{ width: 80 }} allowClear>
+					{
+						rankdir.map((item, index) => {
+							return (
+								<Option value={item} key={index} onClick={() => this.beautify(item)}>
 									{item}
 								</Option>
 							);
