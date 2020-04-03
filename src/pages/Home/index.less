@@ -1,0 +1,149 @@
+.lb-workflow{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    .left-panel{
+        position:relative;
+        float:left;
+        width:149px;
+        height: 100%;
+        margin-right:-150px;
+        background: #fff;
+        border-right: 1px solid #e8e8e8;
+    }
+    .toolbar{
+        padding: 0 10px;
+        height: 50px;
+        border-bottom: 1px solid #eee;
+        .u-icon{
+            font-size: 20px;
+            color: #607D8B;
+            margin: 13px 10px 0 10px;
+            cursor: pointer;
+        }
+    }
+    .item-panel{
+
+    }
+    .main{
+        float:right;
+        width:100%;
+        height: 100%;
+        .main-in{
+            position: relative;
+            margin-left:150px;
+            height: 100%;
+            .wrap-paper{
+                height: ~"calc(100% - 50px)";
+                overflow: auto;
+                .joint-paper.joint-theme-default{
+                    overflow: hidden;
+                }
+                .joint-selection{
+                    position:absolute;
+                    border: 1px solid #c6c7e2;
+                    cursor: move;
+                    .delete{
+                        position: absolute;
+                        left: -20px;
+                        top: -20px;
+                        width: 20px;
+                        cursor: pointer;
+                    }
+                    .arrow{
+                        position: absolute;
+                        right: -20px;
+                        top: 50%;
+                        margin-top: -10px;
+                        width: 20px;
+                        cursor: pointer;
+                    }
+                }
+                .joint-navigator{
+                    position: absolute; 
+                    bottom: 8px;
+                    right: 8px;
+                    border: #ccc solid 1px;
+                    overflow: hidden;
+                    .current-view{
+                        position: absolute;
+                        left: 2px;
+                        top: 2px;
+                        border: 2px dotted #999;
+                        cursor: move;
+                    }
+                }
+            }
+        }
+    }
+    .m-contextmenu{
+        position: absolute;
+        ul{
+            border: #e4e4e4 solid 1px;
+            li{
+                background: #fff;
+                width: 150px;
+                font-size: 12px;
+                padding: 5px 2px 5px 12px;
+                cursor: pointer;
+                &:hover{
+                    background: #03A9F4;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+// 自定义节点样式
+.my-html-element{
+    position: absolute;
+    background: #EAEEFA;
+    pointer-events: none;
+    line-height: 25px;
+    border: 1px solid #CCD9FD;
+    border-radius: 20px;
+    box-sizing: border-box;
+    .dot{
+        text-align: center;
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+        background: #628FE4;
+        border-radius: 50%;
+        color: #fff;
+        font-size: 12px;
+        line-height: 22px;
+        margin-right: 4px;
+        margin-left: 3px;
+        vertical-align: middle;
+    }
+    .ellipsis{
+        display: inline-block;
+        width: 64px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        vertical-align: middle;
+        color: #546281;
+        font-size: 12px;
+        text-align: left;
+        margin-top: -1px;
+    }
+}
+
+.horizontal-line{
+    position: absolute;
+    width: 2000px;
+    height: 1px;
+    background: #f90;
+    margin-left: -1000px;
+    display: none;
+}
+.vertical-line{
+    position: absolute;
+    width: 1px;
+    height: 2000px;
+    background: #f90;
+    margin-top: -1000px;
+    display: none;
+}

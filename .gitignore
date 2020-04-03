@@ -1,0 +1,13 @@
+/node_modules
+/dist
+
+# misc
+.DS_Store
+npm-debug.log*
+
+/coverage
+.idea
+
+# vscode
+.vscode
+.local
