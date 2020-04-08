@@ -93,7 +93,46 @@
             }
         }
     }
+    .line-running{
+        .connection{
+            stroke-dasharray: 5;
+            stroke: #4c79ff;
+            animation: dashing 5s linear infinite;
+        }
+        .marker-target{
+            fill:#4c79ff;
+            stroke: #4c79ff;
+        }
+    }
+    .element-running{
+        rect{
+            stroke-dasharray: 10;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-width: 2px;
+            stroke: #4c79ff;
+            animation: eledashing 2s linear infinite;
+        }
+    }
 }
+// 动画
+@keyframes dashing {
+    from {
+      stroke-dashoffset: 150;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+}
+@keyframes eledashing {
+    from {
+      stroke-dashoffset: 80;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+}
+
 // 自定义节点样式
 .my-html-element{
     position: absolute;

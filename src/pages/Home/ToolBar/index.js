@@ -13,15 +13,16 @@ export default class index extends PureComponent {
 
 	state = {
 		list: [
-			{ name: "放大", icon: "plus-circle" },
-			{ name: "缩小", icon: "minus-circle" },
+			{ name: "放大", icon: "zoom-in" },
+			{ name: "缩小", icon: "zoom-out" },
 			{ name: "适合", icon: "global" },
 			{ name: "还原", icon: "login" },
 			{ name: "撤销", icon: "undo" },
 			{ name: "重做", icon: "redo" },
 			{ name: "清空", icon: "delete" },
 			// { name: "打印", icon: "printer" },
-			{ name: "保存", icon: "save" }
+			{ name: "保存", icon: "save" },
+			{ name: "运行", icon: "play-circle" }
 			// { name: "导出svg", icon: "" },
 			// { name: "导出png", icon: "" }
 		],
@@ -58,7 +59,11 @@ export default class index extends PureComponent {
 				operate.print();
 				break;
 			case "保存":
+				console.log(operate.save());
 				alert(operate.save());
+				break;
+			case "运行":
+				this.run();
 				break;
 			case "导出svg":
 				operate.exportSvg();
@@ -69,10 +74,12 @@ export default class index extends PureComponent {
 		}
 	}
 
+	// 路由切换
 	changeRouter(name) {
 		window.lbPaper.options.defaultRouter.name = name;
 	}
 
+	// 美化布局
 	beautify(item) {
 		window.lbPaper.freeze();
 		const cells = window.lbGraph.getCells();
@@ -80,13 +87,27 @@ export default class index extends PureComponent {
 			dagre: dagre,
 			graphlib: graphlib,
 			rankDir: item,
-			rankSep: 130,
+			rankSep: 110,
 			marginX: 50,
 			marginY: 50,
 			nodeSep: 80,
 			edgeSep: 50
 		});
 		window.lbPaper.unfreeze();
+	}
+
+	// 模拟运行
+	run = () => {
+		const cells = window.lbGraph.getCells();
+		let findFirstLine = cells.find(item => {
+			if (item.attributes.source) {
+				return item.attributes.source.id === cells[0].id;
+			}
+		});
+		let secondElement = cells.find(item => findFirstLine.attributes.target.id === item.id);
+
+		$(`g[model-id=${findFirstLine.id}]`).addClass("line-running");
+		$(`g[model-id=${secondElement.id}]`).addClass("element-running");
 	}
 
 	render() {

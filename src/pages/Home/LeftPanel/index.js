@@ -26,7 +26,7 @@ export default class index extends PureComponent {
 			interactive: false
 		});
 
-		// 画圆
+		// 画圆-开始
 		const circle = new joint.shapes.standard.Circle();
 		circle.resize(60, 60);
 		circle.position(45, 50);
@@ -163,6 +163,24 @@ export default class index extends PureComponent {
 			mylabel: "自定义节点"
 		});
 
+		// 圆-结束
+		const end = new joint.shapes.standard.Circle();
+		end.resize(60, 60);
+		end.position(45, 400);
+		end.attr({
+			root: {
+				title: "结束节点"
+			},
+			body: {
+				fill: "rgb(134, 159, 190)",
+				stroke: "rgb(134, 159, 190)"
+			},
+			label: {
+				text: "结束",
+				fill: "white"
+			}
+		});
+
 		// 自定义画线
 		joint.dia.Link.define("lb.CustomLink", {
 			attrs: {
@@ -215,8 +233,9 @@ export default class index extends PureComponent {
 			}
 		});
 
-		stencilGraph.addCell([circle, rect, polygon, customElement]);
+		stencilGraph.addCell([circle, rect, polygon, customElement, end]);
 
+		// 这里可以不用管
 		stencilPaper.on("cell:pointerdown", (cellView, e, x, y) => {
 			$("body").append('<div id="flyPaper" style="position:fixed;z-index:100;opacity:.7;pointer-event:none;background:transparent"></div>');
 			let flyGraph = new joint.dia.Graph();
