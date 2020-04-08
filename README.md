@@ -1,5 +1,6 @@
 # JointJs-Demo
 基于开源jointjs开发出的一套react流程图框架
+<img src="https://cdn.img.wenhairu.com/images/2020/04/08/Nm2EH.png"/>
 ### 功能：
 - 节点拖拽
 - 放大、缩小
