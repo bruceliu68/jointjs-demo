@@ -1,5 +1,3 @@
-import html2canvas from "html2canvas";
-
 /**
  * JointJS操作类
 */
@@ -216,27 +214,10 @@ class Operate {
 		this.graph.clear();
 	}
 
-	// 打印
-	print() {
-		console.log(1);
-	}
-
 	// 保存
 	save() {
 		const jsonString = JSON.stringify(this.graph.toJSON());
 		return jsonString;
-	}
-
-	// 导出SVG
-	exportSvg() {
-
-	}
-
-	// 导出PNG
-	exportPng() {
-		html2canvas(this.current).then((canvas) => {
-			document.body.appendChild(canvas);
-		});
 	}
 
 	// 重绘

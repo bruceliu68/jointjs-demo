@@ -20,11 +20,9 @@ export default class index extends PureComponent {
 			{ name: "撤销", icon: "undo" },
 			{ name: "重做", icon: "redo" },
 			{ name: "清空", icon: "delete" },
-			// { name: "打印", icon: "printer" },
+			{ name: "全屏", icon: "fullscreen" },
 			{ name: "保存", icon: "save" },
 			{ name: "运行", icon: "play-circle" }
-			// { name: "导出svg", icon: "" },
-			// { name: "导出png", icon: "" }
 		],
 		routers: ["normal", "manhattan", "metro", "orthogonal", "oneSide"],
 		rankdir: ["TB", "BT", "LR", "RL"]
@@ -55,8 +53,8 @@ export default class index extends PureComponent {
 			case "清空":
 				operate.clear();
 				break;
-			case "打印":
-				operate.print();
+			case "全屏":
+				this.fullScreen();
 				break;
 			case "保存":
 				console.log(operate.save());
@@ -66,10 +64,10 @@ export default class index extends PureComponent {
 				this.run();
 				break;
 			case "导出svg":
-				operate.exportSvg();
+				this.exportSvg();
 				break;
 			case "导出png":
-				operate.exportPng();
+				this.exportPng();
 				break;
 		}
 	}
@@ -108,6 +106,20 @@ export default class index extends PureComponent {
 
 		$(`g[model-id=${findFirstLine.id}]`).addClass("line-running");
 		$(`g[model-id=${secondElement.id}]`).addClass("element-running");
+	}
+
+	// 全屏
+	fullScreen = () => {
+		const element = document.documentElement;
+		if (element.requestFullscreen) {
+			element.requestFullscreen();
+		} else if (element.msRequestFullscreen) {
+			element.msRequestFullscreen();
+		} else if (element.mozRequestFullScreen) {
+			element.mozRequestFullScreen();
+		} else if (element.webkitRequestFullscreen) {
+			element.webkitRequestFullscreen();
+		}
 	}
 
 	render() {
